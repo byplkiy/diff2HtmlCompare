@@ -33,13 +33,13 @@ from pygments.formatters import HtmlFormatter
 from pygments.token import *
 
 # Monokai is not quite right yet
-PYGMENTS_STYLES = ["vs", "xcode"] 
+PYGMENTS_STYLES = ["vs", "xcode"]
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html class="no-js">
     <head>
-        <!-- 
+        <!--
           html_title:    browser tab title
           reset_css:     relative path to reset css file
           pygments_css:  relative path to pygments css file
@@ -63,7 +63,7 @@ HTML_TEMPLATE = """
     </head>
     <body>
         <div class="" id="topbar">
-          <div id="filetitle"> 
+          <div id="filetitle">
             %(page_title)s
           </div>
           <div class="switches">
@@ -134,7 +134,7 @@ class DefaultLexer(RegexLexer):
 
 class DiffHtmlFormatter(HtmlFormatter):
     """
-    Formats a single source file with pygments and adds diff highlights based on the 
+    Formats a single source file with pygments and adds diff highlights based on the
     diff details given.
     """
     isLeft = False
@@ -281,11 +281,11 @@ class CodeDiff(object):
     Manages a pair of source files and generates a single html diff page comparing
     the contents.
     """
-    pygmentsCssFile = "./deps/codeformats/%s.css"
-    diffCssFile = "./deps/diff.css"
-    diffJsFile = "./deps/diff.js"
-    resetCssFile = "./deps/reset.css"
-    jqueryJsFile = "./deps/jquery.min.js"
+    pygmentsCssFile = "https://byplkiy.github.io/diff2HtmlCompare/deps/codeformats/%s.css"
+    diffCssFile = "https://byplkiy.github.io/diff2HtmlCompare/deps/diff.css"
+    diffJsFile = "https://byplkiy.github.io/diff2HtmlCompare/deps/diff.js"
+    resetCssFile = "https://byplkiy.github.io/diff2HtmlCompare/deps/reset.css"
+    jqueryJsFile = "https://byplkiy.github.io/diff2HtmlCompare/deps/jquery.min.js"
 
     def __init__(self, fromfile, tofile, fromtxt=None, totxt=None, name=None):
         self.filename = name
@@ -410,7 +410,7 @@ creates an html page which highlights the differences between the two. """
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('-s', '--show', action='store_true',
                         help='show html in a browser.')
-    parser.add_argument('-p', '--print-width', action='store_true', 
+    parser.add_argument('-p', '--print-width', action='store_true',
         help='Restrict code to 80 columns wide. (printer friendly in landscape)')
     parser.add_argument('-c', '--syntax-css', action='store', default="vs",
         help='Pygments CSS for code syntax highlighting. Can be one of: %s' % str(PYGMENTS_STYLES))
@@ -423,7 +423,7 @@ creates an html page which highlights the differences between the two. """
     if args.syntax_css not in PYGMENTS_STYLES:
         raise ValueError("Syntax CSS (-c) must be one of %r." % PYGMENTS_STYLES)
 
-    outputpath = "index.html"
+    outputpath = "/tmp/index.html"
     main(args.file1, args.file2, outputpath, args)
     if args.show:
         show(outputpath)
